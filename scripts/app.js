@@ -15,8 +15,10 @@ player1Button.addEventListener('click', function () {
     player1Score += 1;
     if (player1Score === winningScore) {
       isGameOver = true;
-      player1Display.classList.add('winner');
-      player2Display.classList.add('loser');
+      player1Display.classList.add('has-text-success');
+      player2Display.classList.add('has-text-danger ');
+      player1Button.disabled = true;
+      player2Button.disabled = true;
     }
     player1Display.textContent = player1Score;
   }
@@ -27,8 +29,10 @@ player2Button.addEventListener('click', function () {
     player2Score += 1;
     if (player2Score === winningScore) {
       isGameOver = true;
-      player2Display.classList.add('winner');
-      player1Display.classList.add('loser');
+      player2Display.classList.add('has-text-success');
+      player1Display.classList.add('has-text-danger');
+      player1Button.disabled = true;
+      player2Button.disabled = true;
     }
     player2Display.textContent = player2Score;
   }
@@ -47,6 +51,8 @@ function reset() {
   player2Score = 0;
   player1Display.textContent = 0;
   player2Display.textContent = 0;
-  player1Display.classList.remove('winner', 'loser');
-  player2Display.classList.remove('winner', 'loser');
+  player1Display.classList.remove('has-text-success', 'has-text-danger');
+  player2Display.classList.remove('has-text-success', 'has-text-danger');
+  player1Button.disabled = false;
+  player2Button.disabled = false;
 }
