@@ -1,41 +1,41 @@
-const player1Button = document.querySelector('#player1Button');
-const player2Button = document.querySelector('#player2Button');
+const player1 = {
+  score: 0,
+  button: document.querySelector('#player1Button'),
+  display: document.querySelector('#player1Display'),
+};
+
+const player2 = {
+  score: 0,
+  button: document.querySelector('#player2Button'),
+  display: document.querySelector('#player2Display'),
+};
+
 const resetButton = document.querySelector('#reset');
-const player1Display = document.querySelector('#player1Display');
-const player2Display = document.querySelector('#player2Display');
 const winningScoreSelect = document.querySelector('#playto');
 
-let player1Score = 0;
-let player2Score = 0;
 let winningScore = 3;
 let isGameOver = false;
 
-player1Button.addEventListener('click', function () {
+function updateScores(player, opponent) {
   if (!isGameOver) {
-    player1Score += 1;
-    if (player1Score === winningScore) {
+    player.score += 1;
+    if (player.score === winningScore) {
       isGameOver = true;
-      player1Display.classList.add('has-text-success');
-      player2Display.classList.add('has-text-danger ');
-      player1Button.disabled = true;
-      player2Button.disabled = true;
+      player.display.classList.add('has-text-success');
+      opponent.display.classList.add('has-text-danger ');
+      player.button.disabled = true;
+      opponent.button.disabled = true;
     }
-    player1Display.textContent = player1Score;
+    player.display.textContent = player.score;
   }
+}
+
+player1Button.addEventListener('click', function () {
+  updateScores(player1, player2);
 });
 
 player2Button.addEventListener('click', function () {
-  if (!isGameOver) {
-    player2Score += 1;
-    if (player2Score === winningScore) {
-      isGameOver = true;
-      player2Display.classList.add('has-text-success');
-      player1Display.classList.add('has-text-danger');
-      player1Button.disabled = true;
-      player2Button.disabled = true;
-    }
-    player2Display.textContent = player2Score;
-  }
+  updateScores(player2, player1);
 });
 
 winningScoreSelect.addEventListener('change', function () {
