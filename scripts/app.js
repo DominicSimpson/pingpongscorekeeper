@@ -22,7 +22,7 @@ function updateScores(player, opponent) {
     if (player.score === winningScore) {
       isGameOver = true;
       player.display.classList.add('has-text-success');
-      opponent.display.classList.add('has-text-danger ');
+      opponent.display.classList.add('has-text-danger');
       player.button.disabled = true;
       opponent.button.disabled = true;
     }
@@ -30,11 +30,11 @@ function updateScores(player, opponent) {
   }
 }
 
-player1Button.addEventListener('click', function () {
+player1.button.addEventListener('click', function () {
   updateScores(player1, player2);
 });
 
-player2Button.addEventListener('click', function () {
+player2.button.addEventListener('click', function () {
   updateScores(player2, player1);
 });
 
@@ -47,12 +47,10 @@ resetButton.addEventListener('click', reset);
 
 function reset() {
   isGameOver = false;
-  player1Score = 0;
-  player2Score = 0;
-  player1Display.textContent = 0;
-  player2Display.textContent = 0;
-  player1Display.classList.remove('has-text-success', 'has-text-danger');
-  player2Display.classList.remove('has-text-success', 'has-text-danger');
-  player1Button.disabled = false;
-  player2Button.disabled = false;
+  for (let p of [player1, player2]) {
+    p.score = 0;
+    p.display.textContent = 0;
+    p.display.classList.remove('has-text-success', 'has-text-danger');
+    p.button.disabled = false;
+  }
 }
